@@ -5,15 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security Controls Top Trumps</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #0a0a0a; /* Solid near-black for dark mode */
+      color: #e0e0e0; /* Light gray for high-contrast text */
+    }
+    .neon-border {
+      border: 2px solid #00ff00; /* Neon green border */
+      box-shadow: 0 0 12px #00ff00, 0 0 24px rgba(0, 255, 0, 0.5); /* Enhanced neon glow */
+    }
+    .neon-button {
+      @apply font-mono font-bold rounded transition-all duration-300;
+      background-color: #ff6600; /* Neon orange */
+      color: #000; /* Black text for better visibility */
+      text-shadow: 0 0 3px #ff6600;
+    }
+    .neon-button:hover {
+      background-color: #a100a1; /* Neon purple on hover */
+      color: #fff; /* White text on hover */
+      box-shadow: 0 0 18px #a100a1;
+      text-shadow: 0 0 6px #a100a1;
+    }
+    .neon-text {
+      color: #00ff00;
+      text-shadow: 0 0 6px #00ff00;
+    }
+    .card-bg {
+      background-color: rgba(20, 20, 20, 0.9); /* Slightly transparent dark gray */
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
-  <h1 class="text-3xl font-bold text-gray-800 mb-6">Security Controls Top Trumps</h1>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 font-mono">
+  <h1 class="text-4xl font-bold neon-text mb-6">HACKER TOP TRUMPS: SECURITY CONTROLS</h1>
   
   <div id="game" class="flex flex-col md:flex-row gap-6 max-w-4xl w-full">
     <!-- Player Card -->
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full md:w-1/2">
-      <h2 class="text-xl font-semibold text-gray-700 mb-4">Your Card</h2>
-      <div id="playerCard" class="text-gray-600">
+    <div class="card-bg rounded-lg neon-border p-6 w-full md:w-1/2">
+      <h2 class="text-2xl font-semibold neon-text mb-4">> YOUR HACK</h2>
+      <div id="playerCard" class="text-gray-300">
         <p><strong>Name:</strong> <span id="playerName"></span></p>
         <p><strong>Protection Strength:</strong> <span id="playerProtection"></span></p>
         <p><strong>Cost:</strong> <span id="playerCost"></span></p>
@@ -23,21 +52,21 @@
         <p><strong>Description:</strong> <span id="playerDescription"></span></p>
       </div>
       <div class="mt-4">
-        <h3 class="text-lg font-medium text-gray-700">Select a Category:</h3>
+        <h3 class="text-lg font-medium neon-text">> SELECT ATTACK VECTOR:</h3>
         <div class="flex flex-wrap gap-2 mt-2">
-          <button onclick="compare('protection')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Protection Strength</button>
-          <button onclick="compare('cost')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Cost</button>
-          <button onclick="compare('ease')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Ease of Use</button>
-          <button onclick="compare('acceptance')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">User Acceptance</button>
+          <button onclick="compare('protection')" class="neon-button px-4 py-2">Protection Strength</button>
+          <button onclick="compare('cost')" class="neon-button px-4 py-2">Cost</button>
+          <button onclick="compare('ease')" class="neon-button px-4 py-2">Ease of Use</button>
+          <button onclick="compare('acceptance')" class="neon-button px-4 py-2">User Acceptance</button>
         </div>
       </div>
     </div>
     
     <!-- Opponent Card -->
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full md:w-1/2">
-      <h2 class="text-xl font-semibold text-gray-700 mb-4">Opponent's Card</h2>
-      <div id="opponentCard" class="text-gray-600">
-        <div id="opponentHidden" class="text-center text-gray-500 italic">Select a category to reveal the opponent's card!</div>
+    <div class="card-bg rounded-lg neon-border p-6 w-full md:w-1/2">
+      <h2 class="text-2xl font-semibold neon-text mb-4">> OPPONENT'S HACK</h2>
+      <div id="opponentCard" class="text-gray-300">
+        <div id="opponentHidden" class="text-center text-gray-500 italic">> Select a category to reveal the opponent's hack!</div>
         <div id="opponentDetails" class="hidden">
           <p><strong>Name:</strong> <span id="opponentName"></span></p>
           <p><strong>Protection Strength:</strong> <span id="opponentProtection"></span></p>
@@ -51,8 +80,8 @@
     </div>
   </div>
   
-  <div id="result" class="mt-6 text-lg font-medium text-gray-800"></div>
-  <button onclick="newRound()" class="mt-4 bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">New Round</button>
+  <div id="result" class="mt-6 text-lg font-bold neon-text"></div>
+  <button onclick="newRound()" class="mt-4 neon-button px-6 py-2">> NEW HACK ROUND</button>
 
   <script>
     const controls = [

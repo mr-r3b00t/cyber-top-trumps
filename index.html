@@ -44,7 +44,7 @@
       <div id="playerCard" class="text-gray-300">
         <p><strong>Name:</strong> <span id="playerName"></span></p>
         <p><strong>Protection Strength:</strong> <span id="playerProtection"></span></p>
-        <p><strong>Cost:</strong> <span id="playerCost"></span></p>
+        <p><strong>Budget Efficiency:</strong> <span id="playerBudget"></span></p>
         <p><strong>Ease of Use:</strong> <span id="playerEase"></span></p>
         <p><strong>User Acceptance:</strong> <span id="playerAcceptance"></span></p>
         <p><strong>Primary Defense:</strong> <span id="playerDefense"></span></p>
@@ -54,7 +54,7 @@
         <h3 class="text-lg font-medium neon-text">> SELECT CONTROL PARAMETER:</h3>
         <div class="flex flex-wrap gap-2 mt-2">
           <button onclick="compare('protection')" class="neon-button px-4 py-2">Protection Strength</button>
-          <button onclick="compare('cost')" class="neon-button px-4 py-2">Cost</button>
+          <button onclick="compare('budget')" class="neon-button px-4 py-2">Budget Efficiency</button>
           <button onclick="compare('ease')" class="neon-button px-4 py-2">Ease of Use</button>
           <button onclick="compare('acceptance')" class="neon-button px-4 py-2">User Acceptance</button>
         </div>
@@ -69,7 +69,7 @@
         <div id="opponentDetails" class="hidden">
           <p><strong>Name:</strong> <span id="opponentName"></span></p>
           <p><strong>Protection Strength:</strong> <span id="opponentProtection"></span></p>
-          <p><strong>Cost:</strong> <span id="opponentCost"></span></p>
+          <p><strong>Budget Efficiency:</strong> <span id="opponentBudget"></span></p>
           <p><strong>Ease of Use:</strong> <span id="opponentEase"></span></p>
           <p><strong>User Acceptance:</strong> <span id="opponentAcceptance"></span></p>
           <p><strong>Primary Defense:</strong> <span id="opponentDefense"></span></p>
@@ -84,25 +84,25 @@
 
   <script>
     const controls = [
-      { name: "Privacy Shield", protection: 7, cost: 2, ease: 8, acceptance: 2, defense: "Physical Attack", description: "A physical screen filter that narrows viewing angles to prevent shoulder surfing or visual hacking. Easy to deploy and low-cost, but adds significant friction by limiting screen sharing in collaborative settings like meetings." },
-      { name: "Automatic Updates", protection: 8, cost: 2, ease: 8, acceptance: 8, defense: "Network-Based", description: "Automatically downloads and installs software and system updates to patch vulnerabilities. Low-cost and seamless for users, but requires stable internet and may occasionally disrupt workflows during updates." },
-      { name: "Full Disk Encryption", protection: 9, cost: 5, ease: 5, acceptance: 6, defense: "Loss/Destruction", description: "Encrypts all data on a device's storage, protecting it from unauthorized access if the device is lost or stolen. Requires initial setup and can slow performance slightly, but is generally unobtrusive once configured." },
-      { name: "Device PIN Codes", protection: 6, cost: 2, ease: 8, acceptance: 4, defense: "Physical Attack", description: "A numeric or alphanumeric code required to unlock a device. Simple to implement and low-cost, but can be forgotten or guessed, and frequent entry adds moderate user friction." },
-      { name: "Biometric Unlock", protection: 7, cost: 5, ease: 8, acceptance: 6, defense: "Physical Attack", description: "Uses fingerprint, facial recognition, or other biometric data for device access. Fast and user-friendly, but requires compatible hardware and may raise privacy concerns or fail in certain conditions (e.g., wet fingers, poor lighting)." },
-      { name: "Multi-Factor Authentication (MFA)", protection: 9, cost: 5, ease: 5, acceptance: 4, defense: "Network-Based", description: "Requires multiple verification methods (e.g., password + token) for access. Highly effective but can be complex to set up and adds friction with additional authentication steps." },
-      { name: "Firewall", protection: 8, cost: 2, ease: 5, acceptance: 8, defense: "Network-Based", description: "Monitors and controls network traffic based on security rules. Built into most systems, it’s low-cost and runs in the background, but configuration may require technical expertise." },
-      { name: "Endpoint Detection and Response (EDR)", protection: 9, cost: 8, ease: 2, acceptance: 6, defense: "Network-Based", description: "Advanced software that monitors devices for threats, detects suspicious activity, and responds automatically. Highly effective but costly and complex to deploy and manage." },
-      { name: "VPN (Virtual Private Network)", protection: 7, cost: 5, ease: 5, acceptance: 4, defense: "Network-Based", description: "Encrypts internet traffic to secure data over public networks. Effective for remote work, but can slow connection speeds and requires setup and maintenance." },
-      { name: "Intrusion Detection System (IDS)", protection: 8, cost: 8, ease: 2, acceptance: 8, defense: "Network-Based", description: "Monitors network for suspicious activity and alerts administrators. Strong protection but requires expertise to configure and interpret alerts, with high setup costs." },
-      { name: "Security Awareness Training", protection: 7, cost: 5, ease: 5, acceptance: 4, defense: "Social Engineering", description: "Educates users on recognizing phishing, social engineering, and other threats. Effective for human-related risks, but requires ongoing effort and user engagement, adding moderate friction." },
-      { name: "Application Whitelisting", protection: 8, cost: 5, ease: 2, acceptance: 2, defense: "Network-Based", description: "Restricts devices to only run approved applications, preventing unauthorized software execution. Strong protection but complex to configure and can disrupt workflows if legitimate apps are blocked." },
-      { name: "Data Loss Prevention (DLP)", protection: 8, cost: 8, ease: 2, acceptance: 4, defense: "Data Breach", description: "Monitors and prevents unauthorized data sharing or exfiltration. Effective for sensitive data protection, but costly and complex to implement, with potential for false positives impacting user tasks." },
-      { name: "Secure Boot", protection: 7, cost: 2, ease: 8, acceptance: 8, defense: "Physical Attack", description: "Ensures only trusted software loads during device startup, preventing rootkits and unauthorized firmware. Built into modern systems, it’s low-cost and seamless but requires compatible hardware." },
-      { name: "Anti-Virus Software", protection: 7, cost: 5, ease: 8, acceptance: 6, defense: "Network-Based", description: "Detects and removes malware from devices. Widely available and user-friendly, but requires regular updates and may not catch advanced threats, with minimal user friction." },
-      { name: "Network Segmentation", protection: 8, cost: 8, ease: 2, acceptance: 8, defense: "Network-Based", description: "Divides networks into smaller zones to limit the spread of threats. Strong protection for large environments, but setup is complex and costly, with minimal impact on users once implemented." },
-      { name: "Password Manager", protection: 7, cost: 2, ease: 8, acceptance: 6, defense: "Network-Based", description: "Stores and generates complex passwords to enhance security. Easy to use with browser integration, but requires user adoption and may involve a small learning curve." },
-      { name: "Physical Security Locks", protection: 6, cost: 2, ease: 8, acceptance: 4, defense: "Physical Attack", description: "Physical locks or cables to secure devices from theft. Simple and inexpensive, but can be bypassed with tools and may inconvenience users in shared or mobile environments." },
-      { name: "Web Content Filtering", protection: 7, cost: 5, ease: 5, acceptance: 6, defense: "Network-Based", description: "Blocks access to malicious or inappropriate websites, protecting users from web-based threats. Requires configuration but operates seamlessly, with occasional user friction from blocked content." }
+      { name: "Privacy Shield", protection: 7, budget: 8, ease: 8, acceptance: 2, defense: "Physical Attack", description: "A physical screen filter that narrows viewing angles to prevent shoulder surfing or visual hacking. Easy to deploy and low-cost, but adds significant friction by limiting screen sharing in collaborative settings like meetings." },
+      { name: "Automatic Updates", protection: 8, budget: 8, ease: 8, acceptance: 8, defense: "Network-Based", description: "Automatically downloads and installs software and system updates to patch vulnerabilities. Low-cost and seamless for users, but requires stable internet and may occasionally disrupt workflows during updates." },
+      { name: "Full Disk Encryption", protection: 9, budget: 5, ease: 5, acceptance: 6, defense: "Loss/Destruction", description: "Encrypts all data on a device's storage, protecting it from unauthorized access if the device is lost or stolen. Requires initial setup and can slow performance slightly, but is generally unobtrusive once configured." },
+      { name: "Device PIN Codes", protection: 6, budget: 8, ease: 8, acceptance: 4, defense: "Physical Attack", description: "A numeric or alphanumeric code required to unlock a device. Simple to implement and low-cost, but can be forgotten or guessed, and frequent entry adds moderate user friction." },
+      { name: "Biometric Unlock", protection: 7, budget: 5, ease: 8, acceptance: 6, defense: "Physical Attack", description: "Uses fingerprint, facial recognition, or other biometric data for device access. Fast and user-friendly, but requires compatible hardware and may raise privacy concerns or fail in certain conditions (e.g., wet fingers, poor lighting)." },
+      { name: "Multi-Factor Authentication (MFA)", protection: 9, budget: 5, ease: 5, acceptance: 4, defense: "Network-Based", description: "Requires multiple verification methods (e.g., password + token) for access. Highly effective but can be complex to set up and adds friction with additional authentication steps." },
+      { name: "Firewall", protection: 8, budget: 8, ease: 5, acceptance: 8, defense: "Network-Based", description: "Monitors and controls network traffic based on security rules. Built into most systems, it’s low-cost and runs in the background, but configuration may require technical expertise." },
+      { name: "Endpoint Detection and Response (EDR)", protection: 9, budget: 2, ease: 2, acceptance: 6, defense: "Network-Based", description: "Advanced software that monitors devices for threats, detects suspicious activity, and responds automatically. Highly effective but costly and complex to deploy and manage." },
+      { name: "VPN (Virtual Private Network)", protection: 7, budget: 5, ease: 5, acceptance: 4, defense: "Network-Based", description: "Encrypts internet traffic to secure data over public networks. Effective for remote work, but can slow connection speeds and requires setup and maintenance." },
+      { name: "Intrusion Detection System (IDS)", protection: 8, budget: 2, ease: 2, acceptance: 8, defense: "Network-Based", description: "Monitors network for suspicious activity and alerts administrators. Strong protection but requires expertise to configure and interpret alerts, with high setup costs." },
+      { name: "Security Awareness Training", protection: 7, budget: 5, ease: 5, acceptance: 4, defense: "Social Engineering", description: "Educates users on recognizing phishing, social engineering, and other threats. Effective for human-related risks, but requires ongoing effort and user engagement, adding moderate friction." },
+      { name: "Application Whitelisting", protection: 8, budget: 5, ease: 2, acceptance: 2, defense: "Network-Based", description: "Restricts devices to only run approved applications, preventing unauthorized software execution. Strong protection but complex to configure and can disrupt workflows if legitimate apps are blocked." },
+      { name: "Data Loss Prevention (DLP)", protection: 8, budget: 2, ease: 2, acceptance: 4, defense: "Data Breach", description: "Monitors and prevents unauthorized data sharing or exfiltration. Effective for sensitive data protection, but costly and complex to implement, with potential for false positives impacting user tasks." },
+      { name: "Secure Boot", protection: 7, budget: 8, ease: 8, acceptance: 8, defense: "Physical Attack", description: "Ensures only trusted software loads during device startup, preventing rootkits and unauthorized firmware. Built into modern systems, it’s low-cost and seamless but requires compatible hardware." },
+      { name: "Anti-Virus Software", protection: 7, budget: 5, ease: 8, acceptance: 6, defense: "Network-Based", description: "Detects and removes malware from devices. Widely available and user-friendly, but requires regular updates and may not catch advanced threats, with minimal user friction." },
+      { name: "Network Segmentation", protection: 8, budget: 2, ease: 2, acceptance: 8, defense: "Network-Based", description: "Divides networks into smaller zones to limit the spread of threats. Strong protection for large environments, but setup is complex and costly, with minimal impact on users once implemented." },
+      { name: "Password Manager", protection: 7, budget: 8, ease: 8, acceptance: 6, defense: "Network-Based", description: "Stores and generates complex passwords to enhance security. Easy to use with browser integration, but requires user adoption and may involve a small learning curve." },
+      { name: "Physical Security Locks", protection: 6, budget: 8, ease: 8, acceptance: 4, defense: "Physical Attack", description: "Physical locks or cables to secure devices from theft. Simple and inexpensive, but can be bypassed with tools and may inconvenience users in shared or mobile environments." },
+      { name: "Web Content Filtering", protection: 7, budget: 5, ease: 5, acceptance: 6, defense: "Network-Based", description: "Blocks access to malicious or inappropriate websites, protecting users from web-based threats. Requires configuration but operates seamlessly, with occasional user friction from blocked content." }
     ];
 
     function getRandomCard() {
@@ -112,7 +112,7 @@
     function displayCard(card, prefix) {
       document.getElementById(`${prefix}Name`).textContent = card.name;
       document.getElementById(`${prefix}Protection`).textContent = card.protection;
-      document.getElementById(`${prefix}Cost`).textContent = card.cost;
+      document.getElementById(`${prefix}Budget`).textContent = card.budget;
       document.getElementById(`${prefix}Ease`).textContent = card.ease;
       document.getElementById(`${prefix}Acceptance`).textContent = card.acceptance;
       document.getElementById(`${prefix}Defense`).textContent = card.defense;
@@ -131,15 +131,8 @@
       const playerValue = playerCard[category];
       const opponentValue = opponentCard[category];
 
-      // Higher is better for protection, ease, and acceptance; lower is better for cost
-      const isHigherBetter = category !== 'cost';
-      let comparisonResult;
-
-      if (isHigherBetter) {
-        comparisonResult = playerValue > opponentValue ? 'win' : playerValue < opponentValue ? 'lose' : 'tie';
-      } else {
-        comparisonResult = playerValue < opponentValue ? 'win' : playerValue > opponentValue ? 'lose' : 'tie';
-      }
+      // Higher is better for all categories (protection, budget, ease, acceptance)
+      const comparisonResult = playerValue > opponentValue ? 'win' : playerValue < opponentValue ? 'lose' : 'tie';
 
       if (comparisonResult === 'win') {
         result = `You win! ${playerCard.name}'s ${category} (${playerValue}) beats ${opponentCard.name}'s (${opponentValue}).`;
@@ -168,7 +161,7 @@
       document.getElementById('opponentDetails').classList.add('hidden');
       document.getElementById('opponentName').textContent = '';
       document.getElementById('opponentProtection').textContent = '';
-      document.getElementById('opponentCost').textContent = '';
+      document.getElementById('opponentBudget').textContent = '';
       document.getElementById('opponentEase').textContent = '';
       document.getElementById('opponentAcceptance').textContent = '';
       document.getElementById('opponentDefense').textContent = '';
